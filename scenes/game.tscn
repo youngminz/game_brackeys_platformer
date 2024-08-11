@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7myqu48smfty"]
+[gd_scene load_steps=9 format=3 uid="uid://c7myqu48smfty"]
 
 [ext_resource type="PackedScene" uid="uid://bdf3iduw2701h" path="res://scenes/player.tscn" id="1_xhthx"]
 [ext_resource type="Texture2D" uid="uid://bdnm6v163f6fg" path="res://assets/sprites/world_tileset.png" id="2_1xsr4"]
+[ext_resource type="PackedScene" uid="uid://b05h23rgygdyn" path="res://scenes/platform.tscn" id="3_jvnsc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_idqy4"]
 texture = ExtResource("2_1xsr4")
@@ -404,12 +405,50 @@ texture = ExtResource("2_1xsr4")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_idqy4")
 
+[sub_resource type="Animation" id="Animation_8rkda"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(373, 52), Vector2(459, 52)]
+}
+
+[sub_resource type="Animation" id="Animation_eslup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(368, 52)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4kble"]
+_data = {
+"RESET": SubResource("Animation_eslup"),
+"move": SubResource("Animation_8rkda")
+}
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_4mbbb")
 format = 2
-layer_0/tile_data = PackedInt32Array(196609, 0, 0, 196610, 0, 0, 393215, 0, 0, 327680, 0, 0, 262145, 0, 1, 262146, 0, 1, 327681, 0, 1, 327682, 0, 1, 458751, 0, 1, 393216, 0, 1, 393217, 0, 1, 524287, 0, 1, 458753, 0, 1, 458754, 0, 1, 393218, 65536, 0, 458752, 65536, 0, 262144, 65536, 0, 327683, 393216, 0, 327684, 458752, 1, 327685, 393216, 0, 393220, 524288, 1, 393219, 393216, 1, 458755, 393216, 1, 458756, 393216, 1, 458757, 393216, 1, 393221, 393216, 1, 327686, 589824, 0, 327687, 655360, 0, 327688, 720896, 0, 327689, 393216, 0, 327690, 393216, 0, 393225, 393216, 1, 393226, 393216, 1, 458762, 393216, 1, 458761, 393216, 1, 327692, 458752, 0, 327693, 393216, 0, 393228, 393216, 1, 458764, 393216, 1, 458765, 393216, 1, 393229, 524288, 0, -65532, 0, 0, -131067, 0, 0, -131066, 0, 0, 7, 0, 0, 8, 0, 0, 11, 0, 0, -65524, 0, 0, -65523, 0, 0, 14, 0, 0, 65551, 262144, 0, 65552, 262144, 0, 65553, 262144, 0, 196628, 262144, 0, 196629, 262144, 0, 131090, 262144, 1, 196627, 327680, 0, 4, 0, 1, -65531, 0, 1, -65530, 0, 1, 6, 0, 1, 5, 65536, 0, 65543, 0, 1, 65544, 0, 1, 9, 589824, 0, 10, 720896, 0, 65547, 0, 1, 12, 0, 1, 13, 0, 1, 65549, 0, 1, 65550, 0, 1, 65548, 65536, 1, 131087, 262144, 1, 131088, 262144, 1, 131089, 262144, 1, 196626, 262144, 1, 196625, 262144, 1, 262162, 262144, 1, 262163, 262144, 1, 262164, 262144, 1, 262165, 262144, 1, 327701, 262144, 1, 327700, 262144, 1, 393236, 262144, 1, 458772, 262144, 1, 458773, 262144, 1, 393237, 327680, 1, 196636, 131072, 2, 196637, 131072, 0, 262172, 131072, 1, 327708, 131072, 1, 327709, 131072, 1, 393245, 131072, 1, 393246, 131072, 1, 393247, 131072, 1, 327711, 131072, 1, 393244, 196608, 0, 327710, 196608, 0, 262173, 196608, 1, 458780, 131072, 1, 458781, 131072, 1, 458782, 131072, 1, 458783, 131072, 1, -65528, 0, 5, -131064, 0, 4, -196600, 0, 4, -262136, 0, 3)
+layer_0/tile_data = PackedInt32Array(196609, 0, 0, 196610, 0, 0, 393215, 0, 0, 327680, 0, 0, 262145, 0, 1, 262146, 0, 1, 327681, 0, 1, 327682, 0, 1, 458751, 0, 1, 393216, 0, 1, 393217, 0, 1, 524287, 0, 1, 458753, 0, 1, 458754, 0, 1, 393218, 65536, 0, 458752, 65536, 0, 262144, 65536, 0, 327683, 393216, 0, 327684, 458752, 1, 327685, 393216, 0, 393220, 524288, 1, 393219, 393216, 1, 458755, 393216, 1, 458756, 393216, 1, 458757, 393216, 1, 393221, 393216, 1, 327686, 589824, 0, 327687, 655360, 0, 327688, 720896, 0, 327689, 393216, 0, 327690, 393216, 0, 393225, 393216, 1, 393226, 393216, 1, 458762, 393216, 1, 458761, 393216, 1, 327692, 458752, 0, 327693, 393216, 0, 393228, 393216, 1, 458764, 393216, 1, 458765, 393216, 1, 393229, 524288, 0, -65532, 0, 0, -131067, 0, 0, -131066, 0, 0, 7, 0, 0, 8, 0, 0, 11, 0, 0, -65524, 0, 0, -65523, 0, 0, 14, 0, 0, 65551, 262144, 0, 65552, 262144, 0, 65553, 262144, 0, 196628, 262144, 0, 196629, 262144, 0, 131090, 262144, 1, 196627, 327680, 0, 4, 0, 1, -65531, 0, 1, -65530, 0, 1, 6, 0, 1, 5, 65536, 0, 65543, 0, 1, 65544, 0, 1, 9, 589824, 0, 10, 720896, 0, 65547, 0, 1, 12, 0, 1, 13, 0, 1, 65549, 0, 1, 65550, 0, 1, 65548, 65536, 1, 131087, 262144, 1, 131088, 262144, 1, 131089, 262144, 1, 196626, 262144, 1, 196625, 262144, 1, 262162, 262144, 1, 262163, 262144, 1, 262164, 262144, 1, 262165, 262144, 1, 327701, 262144, 1, 327700, 262144, 1, 393236, 262144, 1, 458772, 262144, 1, 458773, 262144, 1, 393237, 327680, 1, -65528, 0, 5, -131064, 0, 4, -196600, 0, 4, -262136, 0, 3, 327710, 131072, 1, 393246, 196608, 0, 458782, 131072, 1, 327711, 131072, 1, 393247, 131072, 1, 458783, 131072, 1, 196638, 131072, 2, 262174, 131072, 1, 196639, 131072, 0, 262175, 196608, 1, 327712, 196608, 0, 393248, 131072, 1, 458784, 131072, 1, 327713, 131072, 1, 393249, 131072, 1, 458785, 131072, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_xhthx")]
 position = Vector2(31, 37)
@@ -418,3 +457,15 @@ position = Vector2(31, 37)
 position = Vector2(1, -5)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
+
+[node name="Platform" parent="." instance=ExtResource("3_jvnsc")]
+position = Vector2(32, 9)
+
+[node name="Platform2" parent="." instance=ExtResource("3_jvnsc")]
+position = Vector2(368, 52)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform2"]
+libraries = {
+"": SubResource("AnimationLibrary_4kble")
+}
+autoplay = "move"
